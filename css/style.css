@@ -1,0 +1,358 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #b6e5de;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+h2 {
+    color: #000000;
+    font-size: 1.9em;
+}
+p{
+    font-size: .75em;
+}
+.titulo h2 {
+    margin-bottom: 0;
+}
+.titulo{
+    text-align: center;
+    margin-bottom: 10%;
+}
+label{
+    font-weight: bold;
+    display: block;
+    font-size: .95em;
+    margin-bottom: .2em;
+}
+form{
+    align-self: center;
+    
+}
+.cadastro form{
+    text-align: start;
+}
+input, textarea, select {
+    padding: 5%;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    
+}
+textarea{
+    margin-top: 10px;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    width: 15rem;
+    padding: 1rem 4rem 1rem 1rem;
+    color:#0d473f;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+select{
+    border: 0;
+    outline: 0;
+    font: inherit;
+    width: 20rem;
+    padding: 1rem 4rem 1rem 1rem;
+    color:#0d473f;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  background-color: #ffffff;
+}
+.button{
+    padding: 5%;
+    margin-top: 20px;
+    width: 21rem;
+    background-color: #60c2b3;
+}
+.button:hover{
+    background-color: #72e7d6;
+}
+.button:active{
+    background-color: #3c796f;
+}
+.button-voltar{
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    margin-top: 5px;
+    max-width: 300px;
+    color:#0d473f;
+    background-color: #76f1df;
+    text-decoration: none;
+}
+.button-voltar:hover{
+    background-color: #a3f7ea;
+}
+.button-voltar:active{
+    background-color: #3c796f;
+}
+.button-lista{
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    margin-top: 20px;
+    max-width: 300px;
+    color: white;
+    background-color: #60c2b3;
+    text-decoration: none;
+    font-size: 1em;
+}
+.button-lista:hover{
+    background-color: #72e7d6;
+}
+.button-lista:active{
+    background-color: #3c796f;
+}
+.button-sair{
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    margin-top: 20px;
+    max-width: 300px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    background-color: #c26060;
+}
+.button-sair:hover{
+    background-color: #ec7575;
+}
+.button-sair:active{
+    background-color: #8d3939;
+}
+.lista p{
+    margin: 4rem;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    width: 80%;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    color: #0d473f;
+}
+th {
+    background-color: #ffffff;
+    color: grey;
+}
+tr{
+    border-radius: 10px;
+    background-color: #d9f4ef;
+}
+tr:nth-child(even){
+    background-color: #f1fffd;
+
+}
+td:first-child{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+td:last-child{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 696.9px;
+    width: 1240px;
+    border-radius: 35px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.container.controle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 696.9px;
+    width: 1240px;
+    background-color: white;
+    border-radius: 35px;
+    padding: 40px;
+    text-align: center;
+    justify-content: center;
+}
+.imagem{
+    margin: 2vh;
+    flex: 2;
+    max-width: 100%;
+}
+.imagem img {
+    width: 100%;
+    height: 100%;
+}
+.login {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+form.button{
+    align-items: center;
+}
+.cadastro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.controle-feedback{
+    align-self: center;
+    text-align: center;
+}
+.rating {
+    display: flex;
+    flex-direction: row-reverse; /* Inverte a ordem pra facilitar o hover */
+    gap: 5px;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+.rating input {
+    display: none; /* Esconde os inputs de rádio */
+}
+
+.rating label {
+    font-size: 1.5em;
+    color: #ccc; /* Cor padrão (cinza) */
+    cursor: pointer;
+    margin-bottom: 0; /* Remove margem do label */
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f1c40f; /* Amarelo quando selecionado ou em hover */
+}
+
+@media (max-width: 768px) {
+    body {
+        margin: 10px; /* Reduz a margem pra telas menores */
+        height: auto; /* Remove altura fixa */
+        min-height: 100vh; /* Garante que o conteúdo ocupe a tela */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Reduz o tamanho do título */
+    }
+
+    p {
+        font-size: 0.9em; /* Aumenta um pouco pra melhor legibilidade */
+    }
+
+    .container,
+    .container.controle {
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        width: 100%; /* Ocupa a largura total */
+        height: auto; /* Remove altura fixa */
+        padding: 20px; /* Reduz o padding */
+        border-radius: 20px; /* Reduz o border-radius */
+    }
+
+    .imagem {
+        flex: none;
+        width: 100%;
+        height: 200px; /* Altura fixa pra imagem no login */
+        margin: 0;
+    }
+    form {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .login {
+        flex: none;
+        padding: 20px;
+    }
+
+    .cadastro,
+    .controle-feedback {
+        width: 100%;
+        align-items: center;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%; /* Ocupa a largura total */
+        max-width: 100%; /* Remove o limite fixo */
+        padding: 10px; /* Ajusta o padding pra rem */
+    }
+
+    textarea,
+    select {
+        width: 100%; /* Garante que textarea e select ocupem a largura total */
+        padding: 10px;
+    }
+
+    .button,
+    .button-lista,
+    .button-voltar,
+    .button-sair {
+        width: 50%; /* Ocupa a largura total */
+        max-width: 100%; /* Remove o limite fixo */
+        padding: 10px; /* Reduz o padding */
+        font-size: 0.9em; /* Reduz o tamanho da fonte */
+        justify-content: center;
+    }
+
+    table {
+        width: 100%; /* Ocupa a largura total */
+        font-size: 0.9em; /* Reduz o tamanho da fonte */
+    }
+
+    th,
+    td {
+        padding: 8px; /* Reduz o padding */
+    }
+
+    .lista p {
+        margin: 2rem; /* Reduz a margem */
+    }
+
+    .rating label {
+        font-size: 1.2em; /* Reduz o tamanho das estrelas */
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.3em; /* Reduz ainda mais o título */
+    }
+
+    label {
+        font-size: 0.9em; /* Reduz o tamanho do label */
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 8px; /* Reduz o padding pra telas menores */
+    }
+
+    .button,
+    .button-lista,
+    .button-voltar,
+    .button-sair {
+        padding: 8px; /* Reduz ainda mais o padding */
+        font-size: 0.8em; /* Reduz a fonte */
+    }
+
+    table {
+        font-size: 0.8em; /* Reduz ainda mais a fonte da tabela */
+    }
+
+    .rating label {
+        font-size: 1em; /* Reduz ainda mais as estrelas */
+    }
+}
