@@ -41,7 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Seja bem-vindo!</h2>
             <p>Faça seu login para fazer seu feedback.</p>
         </div>
-        <?php if (isset($erro)) echo "<p>$erro</p>"; ?>
+        <div style="text-align: center; color: red; top: 0;">
+        <?php  if (isset($erro)) echo "<p>$erro</p>"; ?>
+        </div>
+        
         <form method="post">
             <div class="input-group">
                 <label for="username">Usuário</label>
@@ -54,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <input class="button" type="submit" value="Entrar">
         </form>
+        <p style="text-align: center;">Não tem cadastro? <a href="signup.php">Faça seu cadastro.</a> </p> 
         </div>
     </div>
 </body>

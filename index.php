@@ -16,16 +16,35 @@ if (!isset($_SESSION["loggedin"])){
 </head>
 </head>
 <body>
-    <div class="container controle">
-    <h2 class="controle-feedback">Controle de Feedback</h2>
-    <div class="lista">
-    <p><a href="cadastro.php" class="button-lista"><i class="fas fa-users"></i> Cadastrar Colaborador</a></p>
-    <p><a href="feedback.php" class="button-lista"><i class="fas fa-star"></i> Enviar Feedback</a></p>
-    <p><a href="lista.php" class="button-lista"><i class="fas fa-list"></i> Listar Feedbacks</a></p>
-    <p><a href="logout.php" class="button-sair"> <i class="fas fa-sign-out-alt"></i> Sair</a></p>
-
-    </div>
-    
+    <div class="inner-container">
+        <h2 class="index-title">Controle de Feedback</h2>
+        <div class="index-cards">
+            <a href="cadastro.php" class="index-card">
+                <div class="icon-container gradient-users">
+                    <i class="fas fa-users icon"></i>
+                </div>
+                <h3>Cadastrar colaborador</h3>
+                <p>Faça o cadastro de colaboradores para que seja possível eles registrarem seus feedbacks.</p>
+                <div class="gradient-line gradient-users"></div>
+            </a>
+            <a href="feedback.php" class="index-card">
+                <div class="icon-container gradient-star">
+                    <i class="fas fa-star icon"></i>
+                </div>
+                <h3>Enviar feedback</h3>
+                <p>Espaço onde colaboradores podem fazer seus feedbacks!</p>
+                <div class="gradient-line gradient-star"></div>
+            </a>
+            <a href="lista.php" class="index-card">
+                <div class="icon-container gradient-list">
+                    <i class="fas fa-list icon"></i>
+                </div>
+                <h3>Listar feedbacks</h3>
+                <p>Visualize de forma organizada os feedbacks dos colaboradores.</p>
+                <div class="gradient-line gradient-list"></div>
+            </a>
+        </div>
+        <a href="logout.php" class="button-sair"> <i class="fas fa-sign-out-alt"></i> Sair</a>
     </div>
 </body>
 </html>

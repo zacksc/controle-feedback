@@ -3,16 +3,30 @@ require_once "includes/conexao.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $colaborador_id = $_POST["colaborador_id"];
-    $texto = $_POST["texto"];
+    $texto = trim($_POST["texto"]);
     $nota = $_POST["nota"];
 
-    $stmt = $conn->prepare("INSERT INTO feedbacks (colaborador_id, texto, nota) VALUES (:colaborador_id, :texto, :nota)");
-    $stmt->bindParam(":colaborador_id", $colaborador_id);
-    $stmt->bindParam(":texto", $texto); 
-    $stmt->bindParam(":nota", $nota);
-    $stmt->execute();
-    
-    $sucesso = "Feedback enviado com sucesso!!";
+    if (empty($texto)) {
+        $mensagem = "O feedback não pode estar vazio.";
+    } else {
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM feedbacks WHERE colaborador_id = :colaborador_id AND texto = :texto");
+        $stmt->bindParam(":colaborador_id", $colaborador_id);
+        $stmt->bindParam(":texto", $texto);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+
+        if ($count > 0) {
+            $mensagem = "Este feedback já foi enviado.";
+        } else {
+            $stmt = $conn->prepare("INSERT INTO feedbacks (colaborador_id, texto, nota) VALUES (:colaborador_id, :texto, :nota)");
+            $stmt->bindParam(":colaborador_id", $colaborador_id);
+            $stmt->bindParam(":texto", $texto); 
+            $stmt->bindParam(":nota", $nota);
+            $stmt->execute();
+            
+            $mensagem = "Feedback enviado com sucesso!";
+        }
+    }
 }
 
 $colaboradores = $conn->query("SELECT * FROM colaboradores")->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +42,9 @@ $colaboradores = $conn->query("SELECT * FROM colaboradores")->fetchAll(PDO::FETC
 <body>
     <div class="container controle">
     <h2>Envie seu Feedback</h2>
-    <?php if(isset($sucesso)) echo "<p>$sucesso</p>";?>
+    <?php if(!empty($mensagem)): ?>
+        <p><?php echo $mensagem; ?></p>
+    <?php endif; ?>
     <form method="post">
         <select name="colaborador_id" required>
             <option value="">Selecione um colaborador</option>
