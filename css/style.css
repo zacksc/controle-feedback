@@ -628,3 +628,48 @@ body {
         /* Reduz ainda mais as estrelas */
     }
 }
+
+@media (max-width: 768px) {
+    .inner-container {
+        width: 80%;
+        max-width: none;
+        height: 20%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+
+    .index-cards {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        height: auto;
+    }
+
+    .index-card {
+        width: 80%;
+        height: auto;
+        padding: 15px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .gradient-line {
+        position: static;
+        margin-top: 5px;
+    }
+
+    .index-card h3,
+    .index-card p {
+        text-align: left;
+    }
+}
