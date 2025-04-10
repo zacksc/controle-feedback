@@ -6,31 +6,33 @@ if(!isset($_SESSION["loggedin"])){
 }
 require_once "includes/conexao.php";
 
-// Defina o número de itens por página
 $itens_por_pagina = 10;
 
-// Obtenha o número total de feedbacks
-$total_feedbacks = $conn->query("SELECT COUNT(*) FROM feedbacks")->fetchColumn();
+$total_feedbacks = $conn->query("SELECT COUNT(*) FROM tbFeedback")->fetchColumn();
 
-// Calcule o número total de páginas
 $total_paginas = ceil($total_feedbacks / $itens_por_pagina);
 
-// Obtenha a página atual
 $pagina_atual = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? $_GET['pagina'] : 1;
 $pagina_atual = max(1, min($pagina_atual, $total_paginas));
 
-// Calcule o índice do primeiro item da página atual
 $offset = ($pagina_atual - 1) * $itens_por_pagina;
 
-// Busque os feedbacks da página atual
-$stmt = $conn->prepare("SELECT f.*, c.nome, c.cargo FROM feedbacks f JOIN colaboradores c ON f.colaborador_id = c.id ORDER BY f.data DESC LIMIT :limit OFFSET :offset");
+$stmt = $conn->prepare("SELECT f.*, p.nome, u.login FROM tbFeedback f JOIN tbPessoas p ON f.cliente_id = p.pessoa_id JOIN tbUsuarios u ON f.atualizado_por = u.usuario_id ORDER BY f.feedback_id DESC LIMIT :limit OFFSET :offset");
 $stmt->bindParam(':limit', $itens_por_pagina, PDO::PARAM_INT);
 $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $feedbacks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$avaliacoes = [];
+foreach ($feedbacks as $feedback) {
+    $stmt = $conn->prepare("SELECT a.nota, i.nome AS item FROM tbAvaliacao a JOIN tbItem i ON a.item_id = i.item_id WHERE a.feedback_id = :feedback_id");
+    $stmt->bindParam(':feedback_id', $feedback['feedback_id']);
+    $stmt->execute();
+    $avaliacoes[$feedback['feedback_id']] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,24 +67,32 @@ $feedbacks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="container controle">
-    <h2>Feedbacks recebidos</h2>
+    <h2>Feedbacks Recebidos</h2>
     <table>
         <tr>
             <th>Colaborador</th>
-            <th>Cargo</th>
-            <th>Texto</th>
-            <th>Nota</th>
-            <th>Data</th>
+            <th>Usuário</th>
+            <th>Avaliações</th>
+            <th>Observação</th>
+            <th>Hora</th>
         </tr>
         <?php foreach ($feedbacks as $feedback) {?>
             <tr>
                 <td><?php echo htmlspecialchars($feedback['nome']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['cargo']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['texto']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['nota']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['data']); ?></td>
+                <td><?php echo htmlspecialchars($feedback['login']); ?></td>
+                <td>
+                    <?php
+                    if (isset($avaliacoes[$feedback['feedback_id']])) {
+                        foreach ($avaliacoes[$feedback['feedback_id']] as $avaliacao) {
+                            echo htmlspecialchars($avaliacao['item']) . ": " . htmlspecialchars($avaliacao['nota']) . "★<br>";
+                        }
+                    }
+                    ?>
+                </td>
+                <td><?php echo htmlspecialchars($feedback['observacao']); ?></td>
+                <td><?php echo htmlspecialchars($feedback['datahora']); ?></td>
             </tr>
-            <?php }?>
+        <?php }?>
     </table>
 
     <div class="paginacao">
@@ -111,6 +121,5 @@ $feedbacks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <a href="index.php" class="button-voltar">Voltar</a>
     </div>
-    
 </body>
 </html>

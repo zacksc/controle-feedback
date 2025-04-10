@@ -6,16 +6,17 @@ $mensagem = "";
 require_once "./includes/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
+    $nome = trim($_POST["nome"]);
+    $login = trim($_POST["login"]);
     $password = trim($_POST["password"]);
 
-    if (empty($username) || empty($password)){
+    if (empty($nome) || empty($login) || empty($password)){
         $mensagem = "Preencha todos os dados";
     } else{
         try{
-            $sql ="SELECT id FROM usuarios WHERE username = :username";
+            $sql ="SELECT usuario_id FROM tbUsuarios WHERE login = :login";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":login", $login);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0){
@@ -23,10 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else{
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                $sql ="INSERT INTO usuarios (username, password) VALUES (:username, :password)";
+                $sql ="INSERT INTO tbUsuarios (nome, login, senha, atualizado_por) VALUES (:nome, :login, :senha, :atualizado_por)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(":username", $username);
-                $stmt->bindParam(":password", $hashed_password);
+                $stmt->bindParam(":nome", $nome);
+                $stmt->bindParam(":login", $login);
+                $stmt->bindParam(":senha", $hashed_password);
+                $stmt->bindParam(":atualizado_por", $_SESSION["usuario_id"]);
                 $stmt->execute();
 
                 $mensagem = "Administrador registrado com sucesso. Agora faça o login!";
@@ -36,19 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <div class="container">
         <div class="imagem">
@@ -64,20 +64,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif; ?>
         <form method="post">
             <div class="input-group">
-                <label for="username">Usuário</label>
-                <input type="text" name="username" id="username" placeholder="exemplo@gmail.com" required>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" placeholder="Seu nome" required>
+            </div><br>
+            <div class="input-group">
+                <label for="login">Login</label>
+                <input type="text" name="login" id="login" placeholder="exemplo@gmail.com" required>
             </div><br>
             <div class="input-group">
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" placeholder="*****" required>
             </div>
-            
             <input class="button" type="submit" value="Registrar">
         </form>
-
         <a href="index.php" class="button-voltar" style="text-align: center; align-self: center; width: 200px;">Voltar</a>
         </div>
     </div>
 </body>
-
 </html>

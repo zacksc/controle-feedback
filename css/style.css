@@ -673,3 +673,6 @@ body {
         text-align: left;
     }
 }
+.gradient-user-plus {
+    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+}

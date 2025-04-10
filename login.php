@@ -3,34 +3,32 @@ session_start();
 require_once "./includes/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $login = $_POST["username"];
     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT * FROM usuarios where username = :username");
-    $stmt->bindParam(":username", $username);
+    $stmt = $conn->prepare("SELECT usuario_id, login, senha FROM tbUsuarios where login = :login");
+    $stmt->bindParam(":login", $login);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($password, $user["password"])) {
+    if ($user && password_verify($password, $user['senha'])) {
         $_SESSION["loggedin"] = true;
+        $_SESSION["usuario_id"] = $user['usuario_id'];
         header("Location: index.php");
     } else {
         $erro = "Usuário ou senha inválidos";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <div class="container">
         <div class="imagem">
@@ -44,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div style="text-align: center; color: red; top: 0;">
         <?php  if (isset($erro)) echo "<p>$erro</p>"; ?>
         </div>
-        
         <form method="post">
             <div class="input-group">
                 <label for="username">Usuário</label>
@@ -54,12 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" placeholder="*****" required>
             </div>
-            
             <input class="button" type="submit" value="Entrar">
         </form>
         <p style="text-align: center;">Não tem cadastro? <a href="signup.php">Faça seu cadastro.</a> </p> 
         </div>
     </div>
 </body>
-
 </html>
