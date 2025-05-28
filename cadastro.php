@@ -1,10 +1,10 @@
 <?php
-session_start();
+include_once 'inc/funcoes.php';
 if(!isset($_SESSION["loggedin"])){
     header("Location: login.php");
     exit;
 }
-require "./includes/conexao.php";
+require "inc/conexao.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $nome = $_POST["nome"];
     $cpf = $_POST["cpf"];

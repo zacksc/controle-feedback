@@ -1,10 +1,10 @@
 <?php 
-session_start();
+include_once 'inc/funcoes.php';
 if(!isset($_SESSION["loggedin"])){
     header("Location: login.php");
     exit;
 }
-require_once "includes/conexao.php";
+require_once "inc/conexao.php";
 
 $itens_por_pagina = 10;
 

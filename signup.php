@@ -1,9 +1,9 @@
 <?php
-session_start();
+include_once 'inc/funcoes.php';
 
 $mensagem = "";
 
-require_once "./includes/conexao.php";
+require_once "inc/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = trim($_POST["nome"]);

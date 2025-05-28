@@ -1,0 +1,50 @@
+# Sistema de Controle de Feedback - .gitignore
+
+# Pasta de exemplo/backup
+pasta_exemplo/
+
+# Arquivos de log e relatórios
+logs/*.log
+logs/*.txt
+logs/*_backup_*
+logs/relatorios/
+logs/backup/
+
+# Arquivos de configuração local
+inc/config_local.php
+.env
+.env.local
+
+# Arquivos temporários
+temp/
+tmp/
+*.tmp
+
+# Uploads e media
+uploads/
+media/backup/
+
+# Arquivos do editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos do sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Backup de banco de dados
+*.sql.backup
+*.sql.bak
+backup_*.sql
+
+# Cache
+cache/
+*.cache
+
+# Dependências (se usar Composer no futuro)
+vendor/
+composer.lock

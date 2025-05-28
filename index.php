@@ -1,5 +1,5 @@
 <?php 
-session_start();
+include_once 'inc/funcoes.php';
 if (!isset($_SESSION["loggedin"])){
     header("Location: login.php");
     exit;
@@ -16,25 +16,24 @@ if (!isset($_SESSION["loggedin"])){
 </head>
 <body>
     <div class="inner-container">
-        <h2 class="index-title">Controle de Feedback</h2>
-        <div class="index-cards">
-            <a href="signup.php" class="index-card">
+        <h2 class="index-title">Controle de Feedback</h2>        <div class="index-cards">
+            <a href="usuarios/usuario_listar.php" class="index-card">
                 <div class="icon-container gradient-user-plus">
                     <i class="fas fa-user-plus icon"></i>
                 </div>
-                <h3>Registrar Administrador</h3>
-                <p>Adicione novos administradores ao sistema.</p>
+                <h3>Gerenciar Usuários</h3>
+                <p>Gerencie usuários administradores do sistema.</p>
                 <div class="gradient-line gradient-user-plus"></div>
             </a>
-            <a href="cadastro.php" class="index-card">
+            <a href="colaboradores/colaborador_listar.php" class="index-card">
                 <div class="icon-container gradient-users">
                     <i class="fas fa-users icon"></i>
                 </div>
-                <h3>Cadastrar Colaborador</h3>
-                <p>Faça o cadastro de colaboradores para que seja possível eles registrarem seus feedbacks.</p>
+                <h3>Gerenciar Colaboradores</h3>
+                <p>Gerencie colaboradores que podem enviar feedbacks.</p>
                 <div class="gradient-line gradient-users"></div>
             </a>
-            <a href="feedback.php" class="index-card">
+            <a href="feedbacks/feedback_enviar.php" class="index-card">
                 <div class="icon-container gradient-star">
                     <i class="fas fa-star icon"></i>
                 </div>
@@ -42,7 +41,7 @@ if (!isset($_SESSION["loggedin"])){
                 <p>Espaço onde colaboradores podem fazer seus feedbacks!</p>
                 <div class="gradient-line gradient-star"></div>
             </a>
-            <a href="lista.php" class="index-card">
+            <a href="feedbacks/feedback_listar.php" class="index-card">
                 <div class="icon-container gradient-list">
                     <i class="fas fa-list icon"></i>
                 </div>
