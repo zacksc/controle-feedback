@@ -30,3 +30,6 @@ SELECT usuario_id, login, senha FROM tbUsuarios WHERE login = 'admin'
 -- [2025-05-28 04:36:14] IP: ::1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.100.2 Chrome
 SELECT usuario_id, login, senha FROM tbUsuarios WHERE login = 'admin'
 
+-- [2025-05-28 04:43:30] IP: ::1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Sa
+SELECT usuario_id, login, senha FROM tbUsuarios WHERE login = 'admin'
+
