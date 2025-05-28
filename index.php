@@ -1,12 +1,13 @@
-<?php 
+<?php
 include_once 'inc/funcoes.php';
-if (!isset($_SESSION["loggedin"])){
+if (!isset($_SESSION["loggedin"])) {
     header("Location: login.php");
     exit;
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +15,11 @@ if (!isset($_SESSION["loggedin"])){
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="inner-container">
-        <h2 class="index-title">Controle de Feedback</h2>        <div class="index-cards">
+        <h2 class="index-title">Controle de Feedback</h2>
+        <div class="index-cards">
             <a href="usuarios/usuario_listar.php" class="index-card">
                 <div class="icon-container gradient-user-plus">
                     <i class="fas fa-user-plus icon"></i>
@@ -53,4 +56,5 @@ if (!isset($_SESSION["loggedin"])){
         <a href="logout.php" class="button-sair"> <i class="fas fa-sign-out-alt"></i> Sair</a>
     </div>
 </body>
+
 </html>

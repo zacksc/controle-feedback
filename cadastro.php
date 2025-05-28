@@ -1,11 +1,11 @@
 <?php
 include_once 'inc/funcoes.php';
-if(!isset($_SESSION["loggedin"])){
+if (!isset($_SESSION["loggedin"])) {
     header("Location: login.php");
     exit;
 }
 require "inc/conexao.php";
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $cpf = $_POST["cpf"];
     $nascimento = $_POST["nascimento"];
@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,32 +33,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container controle">
-    <h2>Cadastrar Colaborador</h2>
-    <?php if(isset($sucesso)) echo "<p>$sucesso</p>";?>
-    <div class="cadastro">
-        <form method="post">
-            <div>
-            <label for="nome">Nome</label>
-            <input type="text" placeholder="Nome" name="nome" id="nome" required>
-            </div><br>
-            <div>
-            <label for="cpf">CPF</label>
-            <input type="text" placeholder="CPF" name="cpf" id="cpf" required>
-            </div><br>
-            <div>
-            <label for="nascimento">Data de Nascimento</label>
-            <input type="date" name="nascimento" id="nascimento" required>
-            </div><br>
-            <div>
-            <label for="telefone">Telefone</label>
-            <input type="text" placeholder="Telefone" name="telefone" id="telefone" required>
-            </div><br>
-            <input type="submit" class="button" value="Cadastrar">
-        </form><br>
-        <a href="index.php" class="button-voltar"> Voltar</a>
-    </div>
+        <h2>Cadastrar Colaborador</h2>
+        <?php if (isset($sucesso)) echo "<p>$sucesso</p>"; ?>
+        <div class="cadastro">
+            <form method="post">
+                <div>
+                    <label for="nome">Nome</label>
+                    <input type="text" placeholder="Nome" name="nome" id="nome" required>
+                </div><br>
+                <div>
+                    <label for="cpf">CPF</label>
+                    <input type="text" placeholder="CPF" name="cpf" id="cpf" required>
+                </div><br>
+                <div>
+                    <label for="nascimento">Data de Nascimento</label>
+                    <input type="date" name="nascimento" id="nascimento" required>
+                </div><br>
+                <div>
+                    <label for="telefone">Telefone</label>
+                    <input type="text" placeholder="Telefone" name="telefone" id="telefone" required>
+                </div><br>
+                <input type="submit" class="button" value="Cadastrar">
+            </form><br>
+            <a href="index.php" class="button-voltar"> Voltar</a>
+        </div>
     </div>
 </body>
+
 </html>

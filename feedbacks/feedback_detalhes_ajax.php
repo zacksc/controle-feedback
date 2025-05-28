@@ -9,13 +9,13 @@ try {
     if (!isset($_GET['feedback_id']) || empty($_GET['feedback_id'])) {
         throw new Exception('ID do feedback não fornecido');
     }
-    
+
     $feedback_id = intval($_GET['feedback_id']);
-    
+
     if ($feedback_id <= 0) {
         throw new Exception('ID do feedback inválido');
     }
-    
+
     // Buscar dados do feedback
     $sql = "SELECT f.feedback_id, f.datahora, f.observacao, 
                    p.nome as nome_pessoa, p.cpf, p.telefone,
@@ -28,11 +28,11 @@ try {
     $stmt->bindParam(':feedback_id', $feedback_id);
     $stmt->execute();
     $feedback = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     if (!$feedback) {
         throw new Exception('Feedback não encontrado');
     }
-    
+
     // Buscar avaliações do feedback
     $sql_avaliacoes = "SELECT a.nota, i.nome as nome_item
                        FROM tbAvaliacao a
@@ -43,14 +43,14 @@ try {
     $stmt_avaliacoes->bindParam(':feedback_id', $feedback_id);
     $stmt_avaliacoes->execute();
     $avaliacoes = $stmt_avaliacoes->fetchAll(PDO::FETCH_ASSOC);
-    
+
     // Calcular média das avaliações
     $media_geral = 0;
     if (count($avaliacoes) > 0) {
         $soma = array_sum(array_column($avaliacoes, 'nota'));
         $media_geral = round($soma / count($avaliacoes), 1);
     }
-    
+
     // Gerar HTML para o modal
     $html = '
     <div class="detail-section">
@@ -84,7 +84,7 @@ try {
             <span class="detail-value">' . htmlspecialchars($feedback['telefone'] ?? 'Não informado') . '</span>
         </div>
     </div>';
-    
+
     if (count($avaliacoes) > 0) {
         $html .= '
         <div class="detail-section">
@@ -93,7 +93,7 @@ try {
                 <span class="detail-label"><i class="fas fa-chart-line"></i> Média Geral:</span>
                 <span class="detail-value">
                     <span class="star-rating">';
-        
+
         // Gerar estrelas para a média
         for ($i = 1; $i <= 10; $i++) {
             if ($i <= $media_geral) {
@@ -102,18 +102,18 @@ try {
                 $html .= '<i class="far fa-star empty-star"></i>';
             }
         }
-        
+
         $html .= '</span> (' . $media_geral . '/10)
                 </span>
             </div>
             <div class="avaliacoes-container">';
-        
+
         foreach ($avaliacoes as $avaliacao) {
             $html .= '
                 <div class="avaliacao-item">
                     <strong>' . htmlspecialchars($avaliacao['nome_item']) . '</strong>
                     <div class="avaliacao-stars">';
-            
+
             // Gerar estrelas para cada avaliação
             for ($i = 1; $i <= 10; $i++) {
                 if ($i <= $avaliacao['nota']) {
@@ -122,15 +122,15 @@ try {
                     $html .= '<i class="far fa-star empty-star"></i>';
                 }
             }
-            
+
             $html .= '</div>
                     <div>Nota: ' . $avaliacao['nota'] . '/10</div>
                 </div>';
         }
-        
+
         $html .= '</div></div>';
     }
-    
+
     if (!empty($feedback['observacao'])) {
         $html .= '
         <div class="detail-section">
@@ -140,13 +140,11 @@ try {
             </div>
         </div>';
     }
-    
+
     $response['success'] = true;
     $response['html'] = $html;
-    
 } catch (Exception $e) {
     $response['message'] = $e->getMessage();
 }
 
 echo json_encode($response);
-?>

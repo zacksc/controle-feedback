@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Teste Modal - Sistema de Feedback</title>
@@ -12,7 +13,7 @@
             margin: 0;
             padding: 20px;
         }
-        
+
         .test-container {
             max-width: 600px;
             margin: 0 auto;
@@ -21,7 +22,7 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .test-btn {
             background: linear-gradient(135deg, #17a2b8, #138496);
             color: white;
@@ -33,24 +34,24 @@
             transition: all 0.3s ease;
             margin: 10px 5px;
         }
-        
+
         .test-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(23, 162, 184, 0.3);
         }
-        
+
         .status {
             padding: 15px;
             border-radius: 8px;
             margin: 15px 0;
         }
-        
+
         .success {
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-        
+
         .error {
             background-color: #f8d7da;
             color: #721c24;
@@ -58,27 +59,28 @@
         }
     </style>
 </head>
+
 <body>
     <div class="test-container">
         <h1><i class="fas fa-vial"></i> Teste do Sistema Modal</h1>
         <p>Use os botões abaixo para testar o sistema de popup modal dos detalhes de feedback:</p>
-        
+
         <div>
             <button class="test-btn" onclick="testarModal(1)">
                 <i class="fas fa-eye"></i> Testar Modal - Feedback ID 1
             </button>
-            
+
             <button class="test-btn" onclick="testarModal(999)">
                 <i class="fas fa-exclamation-triangle"></i> Testar Erro - ID Inexistente
             </button>
-            
+
             <button class="test-btn" onclick="window.location.href='feedback_listar.php'">
                 <i class="fas fa-list"></i> Ir para Listagem Completa
             </button>
         </div>
-        
+
         <div id="status"></div>
-        
+
         <h3>Funcionalidades Implementadas:</h3>
         <ul>
             <li>✅ Modal popup responsivo</li>
@@ -89,7 +91,7 @@
             <li>✅ Layout responsivo para mobile</li>
             <li>✅ Tratamento de erros</li>
         </ul>
-        
+
         <h3>Melhorias vs. Sistema Anterior:</h3>
         <ul>
             <li>🚫 <strong>Antes:</strong> Redirecionava para página separada</li>
@@ -105,7 +107,7 @@
         function testarModal(feedbackId) {
             const statusDiv = document.getElementById('status');
             statusDiv.innerHTML = '<div class="status"><i class="fas fa-spinner fa-spin"></i> Testando carregamento do modal...</div>';
-            
+
             // Simular o carregamento via AJAX
             fetch('feedback_detalhes_ajax.php?feedback_id=' + feedbackId)
                 .then(response => response.json())
@@ -122,4 +124,5 @@
         }
     </script>
 </body>
+
 </html>
